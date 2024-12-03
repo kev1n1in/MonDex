@@ -1,11 +1,14 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Digimon from "./pages/Digimon";
 import NotFound from "./pages/NotFound";
 import Pokemon from "./pages/Pokemon";
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
           <Route path="/pokemon" element={<Pokemon />}></Route>
@@ -13,7 +16,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-    </>
+    </QueryClientProvider>
   );
 }
 
