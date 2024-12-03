@@ -6,7 +6,7 @@ const Card = ({ name, imageUrl, types }) => {
     <Wrapper>
       <Name>{name}</Name>
       <Image src={imageUrl} alt={name} />
-      <Types>{types.join(" , ")}</Types>
+      {types && <Types>{types.join(" , ")}</Types>}
     </Wrapper>
   );
 };
@@ -24,7 +24,10 @@ const Wrapper = styled.div`
 `;
 
 const Name = styled.h2``;
-const Image = styled.img``;
+const Image = styled.img`
+  width: 96px;
+  height: 96px;
+`;
 const Types = styled.p``;
 
 export default Card;

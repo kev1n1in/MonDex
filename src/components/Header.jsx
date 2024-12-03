@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Header = () => {
   return (
     <Wrapper>
-      <Title>Pokedex</Title>
+      <Title>Mondex</Title>
     </Wrapper>
   );
 };

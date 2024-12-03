@@ -38,7 +38,6 @@ const MonDex = () => {
   return (
     <Wrapper>
       <Header />
-      <h1>MonDex</h1>
       <CardsList>
         {pokemonData?.map((pokemon, index) => {
           return (
@@ -52,10 +51,7 @@ const MonDex = () => {
         })}
         {digimonData?.map((digimon, index) => {
           return (
-            <div key={index}>
-              <h1>{digimon.name}</h1>
-              <img src={digimon.image} alt={digimon.name} />
-            </div>
+            <Card key={index} name={digimon.name} imageUrl={digimon.image} />
           );
         })}
       </CardsList>
