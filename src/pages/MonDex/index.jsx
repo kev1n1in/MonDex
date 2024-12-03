@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../../components/Card";
 import Header from "../../components/Header";
+import ToggleButton from "../../components/ToggleButton/Button";
 import { getDigimon } from "../../services/digimonService";
 import { getPokemon } from "../../services/pokemonService";
 
@@ -16,7 +17,7 @@ const MonDex = () => {
     error: pokemonError,
     isLoading: isLoadingPokemon,
   } = useQuery({
-    queryKey: ["pokemon"],
+    queryKey: ["pokemon", location.pathname],
     queryFn: getPokemon,
     enabled: isPokemon,
   });
@@ -25,7 +26,7 @@ const MonDex = () => {
     error: digimonError,
     isLoading: isLoadingDigimon,
   } = useQuery({
-    queryKey: ["digimon"],
+    queryKey: ["digimon", location.pathname],
     queryFn: getDigimon,
     enabled: isDigimon,
   });
@@ -38,6 +39,7 @@ const MonDex = () => {
   return (
     <Wrapper>
       <Header />
+      <ToggleButton />
       <CardsList>
         {pokemonData?.map((pokemon, index) => {
           return (

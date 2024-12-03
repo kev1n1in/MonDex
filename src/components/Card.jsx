@@ -5,7 +5,10 @@ const Card = ({ name, imageUrl, types }) => {
   return (
     <Wrapper>
       <Name>{name}</Name>
-      <Image src={imageUrl} alt={name} />
+      <ImageContainer>
+        <Image src={imageUrl} alt={name} />
+      </ImageContainer>
+
       {types && <Types>{types.join(" , ")}</Types>}
     </Wrapper>
   );
@@ -20,10 +23,19 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 120px;
+  width: 150px;
+  height: 200px;
+  margin: 12px;
+  background-color: #f2f2f2;
 `;
 
-const Name = styled.h2``;
+const Name = styled.h2`
+  padding-top: 12px;
+  height: 50px;
+`;
+const ImageContainer = styled.div`
+  background-color: #fff;
+`;
 const Image = styled.img`
   width: 96px;
   height: 96px;
