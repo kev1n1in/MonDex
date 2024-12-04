@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Card = ({ name, imageUrl, types }) => {
+const Card = ({ name, imageUrl, types, onClick }) => {
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Name>{name}</Name>
       <ImageContainer>
         <Image src={imageUrl} alt={name} />
@@ -17,6 +17,7 @@ Card.propTypes = {
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 const Wrapper = styled.div`

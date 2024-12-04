@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../../components/Card";
 import Header from "../../components/Header";
@@ -9,6 +9,7 @@ import { getPokemon } from "../../services/pokemonService";
 
 const MonDex = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isPokemon = location.pathname.includes("pokemon");
   const isDigimon = location.pathname.includes("digimon");
 
@@ -30,6 +31,14 @@ const MonDex = () => {
     queryFn: getDigimon,
     enabled: isDigimon,
   });
+
+  const handleCardClick = (name) => {
+    console.log("Card clicked:", name);
+    if (isPokemon) {
+      navigate(`/pokemon/${name}`);
+    }
+    navigate(`/digimon/${name}`);
+  };
   if (isLoadingPokemon || isLoadingDigimon) return <div>Loading...</div>;
   if (pokemonError)
     return <div>Error loading Pokemon: {pokemonError.message}</div>;
@@ -48,12 +57,18 @@ const MonDex = () => {
               name={pokemon.name}
               imageUrl={pokemon.imageUrl}
               types={pokemon.types}
+              onClick={() => handleCardClick(pokemon.name)}
             />
           );
         })}
         {digimonData?.map((digimon, index) => {
           return (
-            <Card key={index} name={digimon.name} imageUrl={digimon.image} />
+            <Card
+              key={index}
+              name={digimon.name}
+              imageUrl={digimon.image}
+              onClick={() => handleCardClick(digimon.name)}
+            />
           );
         })}
       </CardsList>
