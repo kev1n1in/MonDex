@@ -1,10 +1,56 @@
-const url = "https://pokeapi.co/api/v2/pokemon";
+const url = "https://pokeapi.co/api/v2";
 
-export const getPokemon = async () => {
+export const getPokemon = async (name) => {
+  console.log(name);
+
   try {
-    const response = await fetch(`${url}?count=20`);
+    if (name) {
+      const responseSpecies = await fetch(`${url}/pokemon-species/${name}`);
+      if (!responseSpecies.ok) {
+        throw new Error(`Failed to fetch Pokémon species details for ${name}.`);
+      }
+      const speciesDetails = await responseSpecies.json();
+      const englishDescribe = speciesDetails.flavor_text_entries.find(
+        (entry) => entry.language.name === "en"
+      )?.flavor_text;
+
+      const evolutionChainUrl = speciesDetails.evolution_chain.url;
+      const responseEvolutionChain = await fetch(evolutionChainUrl);
+      if (!responseEvolutionChain.ok) {
+        throw new Error(`Failed to fetch Evolution Chain for ${name}.`);
+      }
+      const evolutionChain = await responseEvolutionChain.json();
+
+      const responsePokemon = await fetch(`${url}/pokemon/${name}`);
+      if (!responsePokemon.ok) {
+        throw new Error(`Failed to fetch Pokémon details for ${name}.`);
+      }
+      const pokemonDetails = await responsePokemon.json();
+
+      const pokemonData = {
+        name: pokemonDetails.name,
+        id: pokemonDetails.id,
+        image: pokemonDetails.sprites.front_default,
+        types: pokemonDetails.types.map((type) => type.type.name),
+        height: (pokemonDetails.height * 0.1).toFixed(2),
+        weight: (pokemonDetails.weight * 0.1).toFixed(2),
+        baseStats: pokemonDetails.stats.reduce((acc, stat) => {
+          acc[stat.stat.name] = stat.base_stat;
+          return acc;
+        }, {}),
+        abilities: pokemonDetails.abilities.map(
+          (ability) => ability.ability.name
+        ),
+        describe: englishDescribe,
+        evolutionChain: getEvolutionChain(evolutionChain.chain),
+      };
+
+      return pokemonData;
+    }
+
+    const response = await fetch(`${url}/pokemon?limit=20`);
     if (!response.ok) {
-      throw new Error("Failed to fetch.");
+      throw new Error("Failed to fetch Pokémon list.");
     }
     const data = await response.json();
 
@@ -28,4 +74,23 @@ export const getPokemon = async () => {
     console.error(error);
     return [];
   }
+};
+
+const getEvolutionChain = (chain) => {
+  const evolutionChain = [];
+
+  const extractEvolution = (evolution) => {
+    const species = evolution?.species;
+    if (species && species.name && species.url) {
+      const speciesId = species.url.split("/").filter(Boolean).pop();
+
+      evolutionChain.push({
+        name: species.name,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesId}.png`,
+      });
+    }
+    evolution.evolves_to?.forEach(extractEvolution);
+  };
+  extractEvolution(chain);
+  return evolutionChain;
 };
