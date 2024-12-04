@@ -1,8 +1,6 @@
 const url = "https://pokeapi.co/api/v2";
 
-export const getPokemon = async (name) => {
-  console.log(name);
-
+export const getPokemon = async (name, offset) => {
   try {
     if (name) {
       const responseSpecies = await fetch(`${url}/pokemon-species/${name}`);
@@ -44,11 +42,11 @@ export const getPokemon = async (name) => {
         describe: englishDescribe,
         evolutionChain: getEvolutionChain(evolutionChain.chain),
       };
-
+      console.log(pokemonData);
       return pokemonData;
     }
 
-    const response = await fetch(`${url}/pokemon?limit=20`);
+    const response = await fetch(`${url}/pokemon?offset=${offset}&limit=20`);
     if (!response.ok) {
       throw new Error("Failed to fetch Pokémon list.");
     }
@@ -68,8 +66,8 @@ export const getPokemon = async (name) => {
         };
       })
     );
-    console.log(details);
-    return details;
+    console.log(data.next, data.previous);
+    return { results: details, next: data.next, previous: data.previous };
   } catch (error) {
     console.error(error);
     return [];
