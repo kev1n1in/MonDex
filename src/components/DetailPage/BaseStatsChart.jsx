@@ -80,7 +80,9 @@ const BaseStatsChart = ({ baseStats }) => {
   return (
     <div>
       <ChartTitle>BaseStats</ChartTitle>
-      <Bar data={data} options={options} />
+      <BarContainer>
+        <Bar data={data} options={options} />
+      </BarContainer>
     </div>
   );
 };
@@ -90,5 +92,10 @@ BaseStatsChart.propTypes = {
 const ChartTitle = styled.h2`
   font-size: 24px;
   text-align: center;
+  margin: 8px 0;
+`;
+const BarContainer = styled.div`
+  background-color: #f2f2f2;
+  border-radius: 8px;
 `;
 export default BaseStatsChart;
