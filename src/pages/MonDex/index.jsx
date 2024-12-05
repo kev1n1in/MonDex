@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import FetchButton from "../../components/Buttons/FetchButton";
+import ToggleButton from "../../components/Buttons/SwitchButton/Button";
 import Card from "../../components/Card";
-import FetchButton from "../../components/FetchButton";
 import Header from "../../components/Header";
-import ToggleButton from "../../components/SwitchButton/Button";
 import { getDigimon } from "../../services/digimonService";
 import { getPokemon } from "../../services/pokemonService";
 
@@ -32,7 +32,7 @@ const MonDex = () => {
     isLoading: isLoadingDigimon,
   } = useQuery({
     queryKey: ["digimon", name, location.pathname, pagination.page],
-    queryFn: () => getDigimon(pagination.page),
+    queryFn: () => getDigimon(name, pagination.page),
     enabled: isDigimon,
   });
   const updatePagination = (key, value) => {
