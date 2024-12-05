@@ -17,7 +17,6 @@ const Detail = () => {
   const isPokemon = location.pathname.includes("pokemon");
   const isDigimon = location.pathname.includes("digimon");
   const { name } = useParams();
-
   const {
     data: pokemonData,
     error: pokemonError,
@@ -45,12 +44,13 @@ const Detail = () => {
     }
   }, [isPokemon, isDigimon, pokemonData, digimonData]);
   console.log(data);
-
   const handleReturn = () => {
+    const storedPage = localStorage.getItem("page");
+    const storedOffset = localStorage.getItem("offset");
     if (isPokemon) {
-      navigate("/pokemon");
+      navigate(`/pokemon?offset=${storedOffset}`);
     } else if (isDigimon) {
-      navigate("/digimon");
+      navigate(`/digimon?page=${storedPage}`);
     }
   };
   if (isLoadingPokemon || isLoadingDigimon) return <div>Loading...</div>;

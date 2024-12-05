@@ -62,8 +62,10 @@ const MonDex = () => {
 
   const handleCardClick = (name) => {
     if (isPokemon) {
+      localStorage.setItem("offset", pagination.offset);
       navigate(`/pokemon/${name}`);
     } else if (isDigimon) {
+      localStorage.setItem("page", pagination.page);
       navigate(`/digimon/${name}`);
     }
   };
@@ -117,5 +119,11 @@ const CardsList = styled.div`
   margin-top: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 export default MonDex;
