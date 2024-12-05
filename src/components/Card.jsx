@@ -8,8 +8,13 @@ const Card = ({ name, imageUrl, types, onClick }) => {
       <ImageContainer>
         <Image src={imageUrl} alt={name} />
       </ImageContainer>
-
-      {types && <Types>{types.join(" , ")}</Types>}
+      <Types>
+        {types && types.length > 0 ? (
+          types.map((type, index) => <Type key={index}>{type}</Type>)
+        ) : (
+          <Type>??</Type>
+        )}
+      </Types>
     </Wrapper>
   );
 };
@@ -25,22 +30,39 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 150px;
-  height: 200px;
+  height: 220px;
   margin: 12px;
   background-color: #f2f2f2;
+  border-radius: 8px;
 `;
 
 const Name = styled.h2`
   padding-top: 12px;
   height: 50px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const ImageContainer = styled.div`
   background-color: #fff;
 `;
 const Image = styled.img`
-  width: 96px;
-  height: 96px;
+  width: 140px;
+  height: 140px;
 `;
-const Types = styled.p``;
+const Types = styled.div`
+  display: flex;
+`;
+
+const Type = styled.p`
+  padding: 8px;
+  margin: 4px;
+  border-radius: 12px;
+  border: 1px solid #7e7e7e;
+`;
 
 export default Card;

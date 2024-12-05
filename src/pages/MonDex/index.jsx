@@ -95,6 +95,7 @@ const MonDex = () => {
               key={index}
               name={digimon.name}
               imageUrl={digimon.image}
+              types={digimon.types}
               onClick={() => handleCardClick(digimon.name)}
             />
           );
@@ -113,6 +114,7 @@ const Wrapper = styled.div`
   height: auto;
 `;
 const CardsList = styled.div`
+  margin-top: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 `;
