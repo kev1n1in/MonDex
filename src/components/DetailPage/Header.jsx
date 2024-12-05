@@ -3,36 +3,42 @@ import styled from "styled-components";
 import ReturnButton from "../Buttons/ReturnButton";
 
 const DetailHeader = ({ data, handleReturn, isDigimon }) => {
+  const image = data?.image || data?.speciesDetails?.images?.[0]?.href;
+  const name = data?.name || data?.speciesDetails?.name;
+  const id = data?.id || data?.speciesDetails?.id;
+  const levels = data?.speciesDetails?.levels || [];
+  const attributes = data?.speciesDetails?.attributes || [];
+  const fields = data?.speciesDetails?.fields || [];
+  const types = data?.types || [];
+
   return (
     <Header>
       <ImageContainer>
-        <Image src={data?.image || data?.speciesDetails?.images[0].href} />
+        <Image src={image} />
       </ImageContainer>
       <ReturnButton onClick={handleReturn} />
       <CharacterContainer>
         <NameIdContainer>
-          <Name>{data?.name || data?.speciesDetails?.name}</Name>
-          <Id>ID:{data?.id || data?.speciesDetails?.id}</Id>
+          <Name>{name}</Name>
+          <Id>ID:{id}</Id>
         </NameIdContainer>
         <Types>
-          {data?.speciesDetails?.levels?.length > 0 && (
-            <Level>{data?.speciesDetails?.levels[0]?.level}</Level>
-          )}
+          {levels.length > 0 && <Level>{levels[0]?.level}</Level>}
           {isDigimon &&
-            data?.speciesDetails.attributes?.map((attribute, index) => (
+            attributes?.map((attribute, index) => (
               <Attributes key={index}>{attribute.attribute}</Attributes>
             ))}
         </Types>
 
         <Types>
-          {data?.types &&
-            data?.types.map((type, index) => {
+          {types &&
+            types.map((type, index) => {
               return <Type key={index}>{type?.type || type} </Type>;
             })}
         </Types>
         <Fields>
           {isDigimon &&
-            data?.speciesDetails.fields.map((field, index) => (
+            fields.map((field, index) => (
               <FieldImg key={index} src={field.image} alt={field.field} />
             ))}
         </Fields>
@@ -107,13 +113,16 @@ const NameIdContainer = styled.div`
 `;
 
 const Name = styled.h1`
+  white-space: normal;
+  word-wrap: break-word;
   font-size: 24px;
+  width: 140px;
   margin: 4px 12px 4px 0;
 `;
 const Id = styled.p`
-  font-size: 20px;
+  font-size: 24px;
   margin: 4px 0;
-  align-self: end;
+  align-self: start;
 `;
 const Level = styled.div`
   margin: 4px 4px 4px 0;

@@ -29,9 +29,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150px;
+  width: 160px;
   height: 220px;
-  margin: 12px;
+  margin: 4px;
   background-color: #f2f2f2;
   border-radius: 8px;
 `;
@@ -62,6 +62,7 @@ const Type = styled.p`
   padding: 8px;
   margin: 4px;
   border-radius: 12px;
+  font-size: 10px;
   border: 1px solid #7e7e7e;
 `;
 

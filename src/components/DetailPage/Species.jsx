@@ -2,12 +2,14 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Species = ({ data, isPokemon }) => {
+  const description = data?.describe || data?.descriptions;
+
+  if (!description && !data?.height && !data?.weight) {
+    return null;
+  }
   return (
     <Wrapper>
-      {data?.describe && (
-        <Describe>{data?.describe || data?.descriptions}</Describe>
-      )}
-
+      {description && <Describe>{description}</Describe>}
       {isPokemon && (
         <BodyStats>
           <BodyStat>

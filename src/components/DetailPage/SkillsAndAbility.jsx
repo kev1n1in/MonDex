@@ -2,23 +2,26 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const SkillAndAbility = ({ data, isPokemon, isDigimon }) => {
+  if (!data) return null;
+
   return (
     <>
-      {isPokemon && (
+      {isPokemon && data?.abilities?.length > 0 && (
         <>
           <Title>Abilities</Title>
           <Abilities>
-            {data?.abilities?.map((ability, index) => (
+            {data.abilities.map((ability, index) => (
               <Ability key={index}>{ability}</Ability>
             ))}
           </Abilities>
         </>
       )}
-      {isDigimon && (
+
+      {isDigimon && data?.speciesDetails?.skills?.length > 0 && (
         <>
           <Title>Skills</Title>
           <Abilities>
-            {data?.speciesDetails?.skills.slice(0, 3).map((skill, index) => (
+            {data.speciesDetails.skills.slice(0, 3).map((skill, index) => (
               <Ability key={index}>{skill.skill}</Ability>
             ))}
           </Abilities>
@@ -56,7 +59,6 @@ const Title = styled.h2`
 `;
 const Ability = styled.div`
   padding: 8px;
-  font-size: 18px;
   border: 1px solid #979797;
   border-radius: 8px;
 `;

@@ -2,28 +2,24 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Evolution = ({ data, isPokemon }) => {
+  const evolutionChain = data?.evolutionChain || [];
+
+  if (!isPokemon || !data?.evolutionChain?.length) return null;
+
   return (
     <>
-      {isPokemon && data?.baseStats && (
-        <>
-          <Title>Evolution</Title>
-          <EvolutionChain>
-            {data?.evolutionChain &&
-              data?.evolutionChain?.map((evolution, index) => {
-                const nextEvolution = data.evolutionChain[index + 1];
-                return (
-                  <EvolutionCardContainer key={index}>
-                    <EvolutionCard>
-                      <Image src={evolution.image}></Image>
-                      <EvolutionName>{evolution.name}</EvolutionName>
-                    </EvolutionCard>
-                    {nextEvolution && <Arrow>{">"}</Arrow>}
-                  </EvolutionCardContainer>
-                );
-              })}
-          </EvolutionChain>
-        </>
-      )}
+      <Title>Evolution</Title>
+      <EvolutionChain>
+        {evolutionChain.map((evolution, index) => (
+          <EvolutionCardContainer key={index}>
+            <EvolutionCard>
+              <Image src={evolution.image} alt={evolution.name} />
+              <EvolutionName>{evolution.name}</EvolutionName>
+            </EvolutionCard>
+            {evolutionChain[index + 1] && <Arrow>{">"}</Arrow>}
+          </EvolutionCardContainer>
+        ))}
+      </EvolutionChain>
     </>
   );
 };
