@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import BaseStats from "../../components/BaseStatsChart";
 import ReturnButton from "../../components/Buttons/ReturnButton";
 import { getDigimon } from "../../services/digimonService";
 import { getPokemon } from "../../services/pokemonService";
@@ -58,13 +59,17 @@ const Detail = () => {
   return (
     <Wrapper>
       <Header>
+        <ImageContainer>
+          <Image src={data?.image || data?.speciesDetails.images[0].href} />
+        </ImageContainer>
+
         <ReturnButton onClick={handleReturn} />
         <CharacterContainer>
           <NameIdContainer>
             <Name>{data?.name || data?.speciesDetails.name}</Name>
             <Id>ID:{data?.id || data?.speciesDetails.id}</Id>
-            {isDigimon && <Level>{data?.speciesDetails.levels[0].level}</Level>}
           </NameIdContainer>
+          {isDigimon && <Level>{data?.speciesDetails?.levels[0]?.level}</Level>}
           {isDigimon &&
             data?.speciesDetails.attributes?.map((attribute, index) => (
               <Attributes key={index}>{attribute.attribute}</Attributes>
@@ -76,60 +81,68 @@ const Detail = () => {
                 return <Type key={index}>{type?.type || type} </Type>;
               })}
           </Types>
+          <Fields>
+            {isDigimon &&
+              data?.speciesDetails.fields.map((field, index) => (
+                <FieldImg key={index} src={field.image} alt={field.field} />
+              ))}
+          </Fields>
         </CharacterContainer>
-        <Image src={data?.image || data?.speciesDetails.images[0].href} />
-        <Fields>
-          {isDigimon &&
-            data?.speciesDetails.fields.map((field, index) => (
-              <FieldImg key={index} src={field.image} alt={field.field} />
-            ))}
-        </Fields>
       </Header>
       <Main>
         <Species>
           <Describe>{data?.describe || data?.descriptions}</Describe>
           {isPokemon && (
-            <>
-              <Height>{data?.height} m</Height>
-              <Weight>{data?.weight} kg</Weight>
-            </>
+            <BodyStats>
+              <BodyStat>
+                <Height>{data?.height} m</Height>
+                <StatTitle>Height</StatTitle>
+              </BodyStat>
+              <BodyStat>
+                <Weight>{data?.weight} kg</Weight>
+                <StatTitle>Weight</StatTitle>
+              </BodyStat>
+            </BodyStats>
           )}
         </Species>
 
         {isPokemon && (
-          <Abilities>
-            {data?.abilities?.map((ability, index) => (
-              <Ability key={index}>{ability}</Ability>
-            ))}
-          </Abilities>
+          <>
+            <Title>Abilities</Title>
+            <Abilities>
+              {data?.abilities?.map((ability, index) => (
+                <Ability key={index}>{ability}</Ability>
+              ))}
+            </Abilities>
+          </>
         )}
         {isDigimon && (
-          <Abilities>
-            {data?.speciesDetails?.skills.slice(0, 3).map((skill, index) => (
-              <Ability key={index}>{skill.skill}</Ability>
-            ))}
-          </Abilities>
+          <>
+            <Title>Skills</Title>
+            <Abilities>
+              {data?.speciesDetails?.skills.slice(0, 3).map((skill, index) => (
+                <Ability key={index}>{skill.skill}</Ability>
+              ))}
+            </Abilities>
+          </>
+        )}
+        {isPokemon && data?.baseStats && (
+          <BaseStats baseStats={data.baseStats} />
         )}
 
-        {isPokemon && data?.baseStats && (
-          <BaseStats>
-            {Object.entries(data.baseStats).map(([stat, value], index) => (
-              <Stat key={index}>
-                <StatTitle>{stat}:</StatTitle>
-                <StatValue>{value}</StatValue>
-              </Stat>
-            ))}
-          </BaseStats>
-        )}
         {isPokemon && data?.baseStats && (
           <EvolutionChain>
             {data?.evolutionChain &&
               data?.evolutionChain?.map((evolution, index) => {
+                const nextEvolution = data.evolutionChain[index + 1];
                 return (
-                  <EvolutionCard key={index}>
-                    <Image src={evolution.image}></Image>
-                    <Name>{evolution.name}</Name>
-                  </EvolutionCard>
+                  <EvolutionCardContainer key={index}>
+                    <EvolutionCard>
+                      <Image src={evolution.image}></Image>
+                      <EvolutionName>{evolution.name}</EvolutionName>
+                    </EvolutionCard>
+                    {nextEvolution && <Arrow>{">"}</Arrow>}
+                  </EvolutionCardContainer>
                 );
               })}
           </EvolutionChain>
@@ -141,37 +154,118 @@ const Detail = () => {
 
 const Wrapper = styled.div``;
 
-const Header = styled.header``;
+const Header = styled.header`
+  display: flex;
+  height: auto;
+  padding-left: 4px;
+  margin: 12px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+`;
 
 const CharacterContainer = styled.div``;
+const ImageContainer = styled.div`
+  display: flex;
+  background-color: #fff;
+  width: 84px;
+  height: 84px;
+  margin: auto 8px auto 0;
+  border-radius: 8px;
+`;
+const Image = styled.img`
+  width: 84px;
+  height: 84px;
+`;
+const NameIdContainer = styled.div`
+  display: flex;
+`;
 
-const NameIdContainer = styled.div``;
+const Name = styled.h1`
+  font-size: 30px;
+  margin: 4px 12px 4px 0;
+`;
 
-const Name = styled.h1``;
-
-const Id = styled.p``;
-const Level = styled.p``;
-const Attributes = styled.div``;
-const Fields = styled.div``;
+const Id = styled.p`
+  margin: 4px 0;
+  align-self: end;
+`;
+const Level = styled.p`
+  margin: 4px 0;
+`;
+const Attributes = styled.div`
+  margin: 4px 0;
+`;
+const Fields = styled.div`
+  margin: 4px 0;
+`;
 const FieldImg = styled.img``;
-const Types = styled.div``;
-const Type = styled.div``;
+const Types = styled.div`
+  display: flex;
+`;
+const Type = styled.div`
+  margin-right: 4px;
+`;
 
-const Image = styled.img``;
+const Main = styled.main`
+  margin: 12px 12px;
+`;
 
-const Main = styled.main``;
+const Species = styled.section`
+  padding: 8px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+`;
 
-const Species = styled.section``;
-
-const Describe = styled.p``;
-const Height = styled.p``;
-const Weight = styled.p``;
-const Abilities = styled.div``;
-const Ability = styled.div``;
-const BaseStats = styled.div``;
-const Stat = styled.div``;
+const Describe = styled.p`
+  margin: 8px 0;
+  padding: 4px;
+  border: 1px solid #979797;
+  border-radius: 8px;
+`;
+const BodyStats = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const BodyStat = styled.div`
+  text-align: center;
+  width: 45%;
+`;
+const Height = styled.p`
+  border: 1px solid #979797;
+  border-radius: 8px;
+`;
+const Weight = styled.p`
+  border: 1px solid #979797;
+  border-radius: 8px;
+`;
+const Abilities = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 8px 0;
+  padding: 8px 0;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+`;
+const Title = styled.h2`
+  text-align: center;
+  font-size: 24px;
+`;
+const Ability = styled.div`
+  padding: 8px;
+  font-size: 18px;
+  border: 1px solid #979797;
+  border-radius: 8px;
+`;
 const StatTitle = styled.span``;
-const StatValue = styled.span``;
-const EvolutionChain = styled.div``;
+const EvolutionChain = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+const EvolutionCardContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const EvolutionName = styled.p``;
 const EvolutionCard = styled.div``;
+const Arrow = styled.div``;
 export default Detail;

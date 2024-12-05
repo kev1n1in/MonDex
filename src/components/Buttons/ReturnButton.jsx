@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ReturnButton = ({ onClick }) => {
   return (
     <Wrapper onClick={onClick}>
-      <Button>&lt;</Button>
+      <Button>{"<"}</Button>
     </Wrapper>
   );
 };
@@ -15,7 +15,7 @@ ReturnButton.propTypes = {
 
 const Wrapper = styled.div`
   position: fixed;
-  right: 0;
+  right: 12px;
   top: 12px;
 `;
 const Button = styled.button`
