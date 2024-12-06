@@ -11,7 +11,6 @@ export const getDigimon = async (name, page) => {
       const englishDescribe = speciesDetails.descriptions.find(
         (entry) => entry.language === "en_us"
       )?.description;
-      console.log(speciesDetails);
       return { speciesDetails: speciesDetails, descriptions: englishDescribe };
     }
 
@@ -20,6 +19,7 @@ export const getDigimon = async (name, page) => {
       throw new Error("Failed to fetch.");
     }
     const data = await response.json();
+
     const digimonsDetails = await Promise.all(
       data.content.map(async (digimon) => {
         const digimonResponse = await fetch(digimon.href);
@@ -36,11 +36,11 @@ export const getDigimon = async (name, page) => {
         return {
           name: digimonDetails.name,
           types: type,
-          image: digimonDetails.images ? digimonDetails.images[0].href : "", // 获取第一张图片的 URL
+          image: digimonDetails.images ? digimonDetails.images[0].href : "",
         };
       })
     );
-    console.log(digimonsDetails);
+
     return digimonsDetails;
   } catch (error) {
     console.error(error);
