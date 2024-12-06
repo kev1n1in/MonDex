@@ -56,6 +56,7 @@ const Button = styled.button`
   font-size: 20px;
   width: 40%;
   border-radius: 10px;
+  cursor: pointer;
   @media (min-width: 1000px) {
     font-size: 30px;
   }

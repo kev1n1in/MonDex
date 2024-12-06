@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   background-color: #cdcdcd;
   right: 24px;
   bottom: 50px;
+  z-index: 10;
   @media (min-width: 768px) {
     width: 84px;
     height: 84px;
