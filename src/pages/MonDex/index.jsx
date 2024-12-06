@@ -40,7 +40,8 @@ const MonDex = () => {
     queryFn: () => getDigimon(name, pagination.page),
     enabled: isDigimon,
   });
-  const noData = digimonData?.length === 0 || pokemonData?.results.length === 0;
+  const noData =
+    digimonData?.length === 0 || pokemonData?.results?.length === 0;
 
   const updatePagination = (key, value) => {
     setPagination((prev) => ({

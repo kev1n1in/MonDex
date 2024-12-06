@@ -14,7 +14,7 @@ const ReturnButton = ({ onClick, options }) => {
         borderRadius={borderRadius}
         fontSize={fontSize}
       >
-        {label ? <Image src={label} alt="back" /> : "<"}
+        {label || <Image src={returnImg} alt="back" />}
       </Button>
     </Wrapper>
   );
@@ -38,11 +38,11 @@ ReturnButton.defaultProps = {
     position: "fixed",
     right: "12px",
     top: "12px",
-    label: returnImg,
     width: "36px",
     height: "36px",
     fontSize: "16px",
     borderRadius: "50%",
+    image: "./back.png",
   },
 };
 const Wrapper = styled.div`
