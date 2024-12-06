@@ -29,8 +29,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 160px;
-  height: 220px;
+  width: auto;
   margin: 4px;
   background-color: #f2f2f2;
   border-radius: 8px;
@@ -39,23 +38,47 @@ const Wrapper = styled.div`
 const Name = styled.h2`
   padding-top: 12px;
   height: 50px;
-  width: 100%;
+  width: 155px;
   font-weight: 700;
-  font-size: 20px;
   text-align: center;
+  line-height: 35px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  @media (min-width: 480px) {
+    width: 210px;
+    font-size: 30px;
+  }
+  @media (min-width: 768px) {
+    width: 230px;
+  }
+  @media (min-width: 1280px) {
+    width: 300px;
+  }
 `;
 const ImageContainer = styled.div`
-  background-color: #fff;
-`;
-const Image = styled.img`
-  width: 140px;
+  width: 90%;
   height: 140px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 768px) {
+    height: 200px;
+  }
+  @media (min-width: 1000px) {
+    height: 280px;
+  }
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 const Types = styled.div`
   display: flex;
+  margin: 4px 0;
 `;
 
 const Type = styled.p`
@@ -64,6 +87,15 @@ const Type = styled.p`
   border-radius: 12px;
   font-size: 10px;
   border: 1px solid #7e7e7e;
+  @media (min-width: 480px) {
+    font-size: 12px;
+  }
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 20px;
+  }
 `;
 
 export default Card;
