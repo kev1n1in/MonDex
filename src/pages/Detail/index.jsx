@@ -83,7 +83,9 @@ const Detail = () => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-bottom: 50px;
+`;
 
 const Main = styled.main`
   margin: 12px 12px;

@@ -52,7 +52,10 @@ const EvolutionCardContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-const EvolutionName = styled.p``;
+const EvolutionName = styled.p`
+  margin-bottom: 8px;
+  text-align: center;
+`;
 const EvolutionCard = styled.div``;
 const Arrow = styled.div``;
 const Image = styled.img`
