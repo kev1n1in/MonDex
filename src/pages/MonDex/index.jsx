@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AlertMessage from "../../components/AlertMessage";
 import FetchButton from "../../components/Buttons/FetchButton";
 import ToggleButton from "../../components/Buttons/SwitchButton/Button";
 import Card from "../../components/Card";
 import Header from "../../components/Header";
+import useNetworkStatus from "../../hooks/useNetworkStatus";
 import { getDigimon } from "../../services/digimonService";
 import { getPokemon } from "../../services/pokemonService";
 
@@ -16,6 +18,7 @@ const MonDex = () => {
   const isPokemon = location.pathname.includes("pokemon");
   const isDigimon = location.pathname.includes("digimon");
   const name = null;
+  const isOnline = useNetworkStatus();
 
   const {
     data: pokemonData,
@@ -77,6 +80,7 @@ const MonDex = () => {
 
   return (
     <Wrapper>
+      {!isOnline && <AlertMessage message="You are offline!" />}
       <Header />
       <ToggleButton />
       <CardsList>

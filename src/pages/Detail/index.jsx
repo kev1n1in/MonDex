@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import AlertMessage from "../../components/AlertMessage";
 import BaseStats from "../../components/DetailPage/BaseStatsChart";
 import Evolution from "../../components/DetailPage/Evolution";
 import DetailHeader from "../../components/DetailPage/Header";
 import SkillAndAbility from "../../components/DetailPage/SkillsAndAbility";
 import Species from "../../components/DetailPage/Species";
+import useNetworkStatus from "../../hooks/useNetworkStatus";
 import { getDigimon } from "../../services/digimonService";
 import { getPokemon } from "../../services/pokemonService";
 
@@ -17,6 +19,7 @@ const Detail = () => {
   const isPokemon = location.pathname.includes("pokemon");
   const isDigimon = location.pathname.includes("digimon");
   const { name } = useParams();
+  const isOnline = useNetworkStatus();
   const {
     data: pokemonData,
     error: pokemonError,
@@ -61,6 +64,7 @@ const Detail = () => {
 
   return (
     <Wrapper>
+      {!isOnline && <AlertMessage message="You are offline!" />}
       <DetailHeader
         data={data}
         isDigimon={isDigimon}

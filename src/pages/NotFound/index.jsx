@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AlertMessage from "../../components/AlertMessage";
 import ReturnButton from "../../components/Buttons/ReturnButton";
 import Header from "../../components/Header";
+import useNetworkStatus from "../../hooks/useNetworkStatus";
 import psyduckImg from "./psyduck.png";
 
 const NotFound = () => {
   const navigate = useNavigate();
+  const isOnline = useNetworkStatus();
   const buttonOptions = {
     position: "relative",
     label: "Go Back",
@@ -19,6 +22,7 @@ const NotFound = () => {
   };
   return (
     <>
+      {!isOnline && <AlertMessage message="You are offline!" />}
       <Header />
       <Wrapper>
         <Container>
@@ -42,6 +46,9 @@ const SubTitle = styled.h2`
   margin: 20px 10px;
   font-size: 20px;
   color: gray;
+  @media (min-width: 480px) {
+    text-align: center;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
