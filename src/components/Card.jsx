@@ -30,9 +30,16 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: auto;
-  margin: 4px;
+  margin: 8px;
   background-color: #f2f2f2;
   border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 const Name = styled.h2`
