@@ -8,11 +8,10 @@ import ToggleButton from "../../components/Buttons/SwitchButton/Button";
 import Card from "../../components/Card";
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
+import NoDataContainer from "../../components/NoDataMessage.jsx/Message";
 import useNetworkStatus from "../../hooks/useNetworkStatus";
 import { getDigimon } from "../../services/digimonService";
 import { getPokemon } from "../../services/pokemonService";
-import mochimonImg from "./mochimon.png";
-import psyduckImg from "./psyduck.png";
 
 const MonDex = () => {
   const [pagination, setPagination] = useState({ offset: 0, page: 0 });
@@ -90,10 +89,7 @@ const MonDex = () => {
       <Header />
       <ToggleButton />
       {noData ? (
-        <NoDataContainer>
-          <Image src={isPokemon ? psyduckImg : mochimonImg} />
-          <Message>No results found</Message>
-        </NoDataContainer>
+        <NoDataContainer isDigimon={isDigimon} isPokemon={isPokemon} />
       ) : (
         <>
           <CardsList>
@@ -136,23 +132,6 @@ const Wrapper = styled.div`
   margin-bottom: 48px;
 `;
 
-const NoDataContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 24px;
-`;
-const Message = styled.div`
-  text-align: center;
-  font-size: 36px;
-  @media (min-width: 480px) {
-    font-size: 48px;
-  }
-`;
-const Image = styled.img`
-  margin: 0 auto;
-  max-width: 276px;
-  max-height: 359px;
-`;
 const CardsList = styled.div`
   margin: 12px;
   display: grid;
