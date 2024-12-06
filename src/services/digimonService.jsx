@@ -20,7 +20,6 @@ export const getDigimon = async (name, page) => {
       throw new Error("Failed to fetch.");
     }
     const data = await response.json();
-    console.log(data);
     const digimonsDetails = await Promise.all(
       data.content.map(async (digimon) => {
         const digimonResponse = await fetch(digimon.href);

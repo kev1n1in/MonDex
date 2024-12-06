@@ -8,6 +8,7 @@ import Evolution from "../../components/DetailPage/Evolution";
 import DetailHeader from "../../components/DetailPage/Header";
 import SkillAndAbility from "../../components/DetailPage/SkillsAndAbility";
 import Species from "../../components/DetailPage/Species";
+import Loader from "../../components/Loader";
 import useNetworkStatus from "../../hooks/useNetworkStatus";
 import { getDigimon } from "../../services/digimonService";
 import { getPokemon } from "../../services/pokemonService";
@@ -56,7 +57,7 @@ const Detail = () => {
       navigate(`/digimon?page=${storedPage}`);
     }
   };
-  if (isLoadingPokemon || isLoadingDigimon) return <div>Loading...</div>;
+
   if (pokemonError)
     return <div>Error loading Pokemon: {pokemonError.message}</div>;
   if (digimonError)
@@ -64,6 +65,7 @@ const Detail = () => {
 
   return (
     <Wrapper>
+      <Loader isLoading={isLoadingDigimon || isLoadingPokemon} />
       {!isOnline && <AlertMessage message="You are offline!" />}
       <DetailHeader
         data={data}

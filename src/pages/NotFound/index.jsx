@@ -20,6 +20,7 @@ const NotFound = () => {
   const handleReturn = () => {
     navigate("/pokemon");
   };
+
   return (
     <>
       {!isOnline && <AlertMessage message="You are offline!" />}
