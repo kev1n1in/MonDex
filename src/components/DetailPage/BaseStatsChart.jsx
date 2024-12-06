@@ -72,6 +72,7 @@ const BaseStatsChart = ({ baseStats }) => {
           mirror: true,
           font: {
             weight: "bold",
+            size: window.innerWidth < 480 ? 12 : 20,
           },
         },
       },
