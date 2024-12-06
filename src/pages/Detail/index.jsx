@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import AlertMessage from "../../components/AlertMessage";
-import ReturnButton from "../../components/Buttons/ReturnButton";
+import ReturnButton from "../../components/Buttons/Return/ReturnButton";
 import BaseStats from "../../components/DetailPage/BaseStatsChart";
 import Evolution from "../../components/DetailPage/Evolution";
 import DetailHeader from "../../components/DetailPage/Header";
@@ -49,7 +49,8 @@ const Detail = () => {
       setData(digimonData);
     }
   }, [isPokemon, isDigimon, pokemonData, digimonData]);
-  const noData = digimonData?.length === 0 || pokemonData?.results.length === 0;
+  const noData =
+    digimonData?.length === 0 || pokemonData?.results?.length === 0;
   const handleReturn = () => {
     const storedPage = localStorage.getItem("page");
     const storedOffset = localStorage.getItem("offset");
@@ -88,10 +89,7 @@ const Detail = () => {
               isPokemon={isPokemon}
               isDigimon={isDigimon}
             />
-            {isPokemon && data?.baseStats && (
-              <BaseStats baseStats={data.baseStats} />
-            )}
-
+            <BaseStats baseStats={data?.baseStats} />
             <Evolution data={data} isPokemon={isPokemon} />
           </Main>
         </>

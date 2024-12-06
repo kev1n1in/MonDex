@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import ReturnButton from "../Buttons/ReturnButton";
+import ReturnButton from "../Buttons/Return/ReturnButton";
 
 const DetailHeader = ({ data, handleReturn, isDigimon }) => {
   const image = data?.image || data?.speciesDetails?.images?.[0]?.href;
@@ -90,7 +90,7 @@ DetailHeader.propTypes = {
 
 const Header = styled.header`
   display: flex;
-  height: 120px;
+  min-height: 120px;
   padding-left: 4px;
   margin: 12px;
   background-color: #f2f2f2;

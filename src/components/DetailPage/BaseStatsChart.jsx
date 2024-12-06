@@ -21,8 +21,9 @@ ChartJS.register(
 );
 
 const BaseStatsChart = ({ baseStats }) => {
-  const labels = Object.keys(baseStats);
-  const values = Object.values(baseStats);
+  const hasBaseStats = baseStats && Object.keys(baseStats).length > 0;
+  const labels = hasBaseStats ? Object.keys(baseStats) : [];
+  const values = hasBaseStats ? Object.values(baseStats) : [];
 
   const data = {
     labels: labels,
@@ -81,7 +82,11 @@ const BaseStatsChart = ({ baseStats }) => {
     <Wrapper>
       <ChartTitle>BaseStats</ChartTitle>
       <BarContainer>
-        <Bar data={data} options={options} />
+        {hasBaseStats ? (
+          <Bar data={data} options={options} />
+        ) : (
+          <Result>Not Found</Result>
+        )}
       </BarContainer>
     </Wrapper>
   );
@@ -96,8 +101,19 @@ const ChartTitle = styled.h2`
   margin: 8px 0;
 `;
 const BarContainer = styled.div`
+  padding: 8px;
   background-color: #f2f2f2;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+`;
+const Result = styled.div`
+  padding: 8px;
+  margin-bottom: 4px;
+  background-color: ghostwhite;
+  border: 1px solid #979797;
+  border-radius: 8px;
+  @media (min-width: 480px) {
+    font-size: 24px;
+  }
 `;
 export default BaseStatsChart;

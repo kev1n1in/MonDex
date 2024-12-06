@@ -1,25 +1,30 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Species = ({ data, isPokemon }) => {
+const Species = ({ data }) => {
   const description = data?.describe || data?.descriptions;
+  const height = data?.height;
+  const weight = data?.weight;
+  const isDataMissing = !description && !height && !weight;
 
-  if (!description && !data?.height && !data?.weight) {
-    return null;
-  }
   return (
     <Wrapper>
       <Title>Description</Title>
-      {description && <Describe>{description}</Describe>}
-      {isPokemon && (
+      {isDataMissing ? (
+        <Describe>Not Found</Describe>
+      ) : (
+        description && <Describe>{description}</Describe>
+      )}
+
+      {isDataMissing && (
         <BodyStats>
           <BodyStat>
             <Title>Height</Title>
-            <Stat>{data?.height} m</Stat>
+            <Stat>{height ? `${height} m` : "Not Found"}</Stat>
           </BodyStat>
           <BodyStat>
             <Title>Weight</Title>
-            <Stat>{data?.weight} kg</Stat>
+            <Stat>{weight ? `${weight} kg` : "Not Found"}</Stat>
           </BodyStat>
         </BodyStats>
       )}

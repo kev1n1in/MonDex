@@ -2,34 +2,49 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const SkillAndAbility = ({ data, isPokemon, isDigimon }) => {
-  if (!data) return null;
+  const abilities = isPokemon ? data?.abilities : [];
+  const skills = isDigimon ? data?.speciesDetails?.skills : [];
+
+  const hasAbilities = abilities?.length;
+  const hasSkills = skills?.length;
 
   return (
     <>
-      {isPokemon && data?.abilities?.length > 0 && (
+      {isPokemon && (
         <>
           <Title>Abilities</Title>
-          <Abilities>
-            {data.abilities.map((ability, index) => (
-              <Ability key={index}>{ability}</Ability>
-            ))}
-          </Abilities>
+          {hasAbilities ? (
+            <Abilities>
+              {abilities.map((ability, index) => (
+                <Ability key={index}>{ability}</Ability>
+              ))}
+            </Abilities>
+          ) : (
+            <Ability>Not Found</Ability>
+          )}
         </>
       )}
 
-      {isDigimon && data?.speciesDetails?.skills?.length > 0 && (
+      {isDigimon && (
         <>
           <Title>Skills</Title>
-          <Abilities>
-            {data.speciesDetails.skills.slice(0, 3).map((skill, index) => (
-              <Ability key={index}>{skill.skill}</Ability>
-            ))}
-          </Abilities>
+          {hasSkills ? (
+            <Abilities>
+              {skills.slice(0, 3).map((skill, index) => (
+                <Ability key={index}>{skill.skill}</Ability>
+              ))}
+            </Abilities>
+          ) : (
+            <Abilities>
+              <Ability>Not Found</Ability>
+            </Abilities>
+          )}
         </>
       )}
     </>
   );
 };
+
 SkillAndAbility.propTypes = {
   data: PropTypes.shape({
     abilities: PropTypes.arrayOf(PropTypes.string),
