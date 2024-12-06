@@ -46,9 +46,9 @@ SkillAndAbility.propTypes = {
 };
 const Abilities = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   margin: 8px 0;
-  padding: 8px 0;
+  padding: 8px;
   background-color: #f2f2f2;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -60,6 +60,8 @@ const Title = styled.h2`
 `;
 const Ability = styled.div`
   padding: 8px;
+  margin-bottom: 4px;
+  background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
 `;

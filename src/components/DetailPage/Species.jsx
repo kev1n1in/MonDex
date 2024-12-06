@@ -36,6 +36,7 @@ Species.propTypes = {
   isPokemon: PropTypes.bool.isRequired,
 };
 const Wrapper = styled.section`
+  margin-top: 16px;
   padding: 8px;
   background-color: #f2f2f2;
   border-radius: 8px;
@@ -44,6 +45,7 @@ const Wrapper = styled.section`
 const Describe = styled.p`
   margin: 8px 0;
   padding: 4px;
+  background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
 `;
@@ -56,10 +58,13 @@ const BodyStat = styled.div`
   width: 45%;
 `;
 const Height = styled.p`
+  background-color: ghostwhite;
   border: 1px solid #979797;
+
   border-radius: 8px;
 `;
 const Weight = styled.p`
+  background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
 `;

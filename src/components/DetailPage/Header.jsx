@@ -131,12 +131,14 @@ const Id = styled.p`
 const Level = styled.div`
   margin: 4px 4px 4px 0;
   padding: 4px;
+  background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
 `;
 const Attributes = styled.div`
   margin: 4px 0;
   padding: 4px;
+  background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
 `;
@@ -150,6 +152,7 @@ const Types = styled.div`
 const Type = styled.div`
   margin-right: 4px;
   padding: 4px;
+  background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
 `;
