@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
-
+import styled from "styled-components";
 const FetchButton = ({ setOffset, offset, page, setPage }) => {
   const location = useLocation();
   const isPokemon = location.pathname.includes("pokemon");
@@ -20,21 +20,21 @@ const FetchButton = ({ setOffset, offset, page, setPage }) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       {isPokemon && (
-        <div>
-          <button onClick={handlePreviousPagePokemon}>Previous</button>
-          <button onClick={handleNextPagePokemon}>Next</button>
-        </div>
+        <Buttons>
+          <Button onClick={handlePreviousPagePokemon}>Previous</Button>
+          <Button onClick={handleNextPagePokemon}>Next</Button>
+        </Buttons>
       )}
 
       {isDigimon && (
-        <div>
-          <button onClick={handlePreviousPageDigimon}>Previous</button>
-          <button onClick={handleNextPageDigimon}>Next</button>
-        </div>
+        <Buttons>
+          <Button onClick={handlePreviousPageDigimon}>Previous</Button>
+          <Button onClick={handleNextPageDigimon}>Next</Button>
+        </Buttons>
       )}
-    </div>
+    </Wrapper>
   );
 };
 
@@ -45,4 +45,20 @@ FetchButton.propTypes = {
   setPage: PropTypes.func.isRequired,
 };
 
+const Wrapper = styled.div`
+  width: 100%;
+`;
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+const Button = styled.button`
+  font-size: 20px;
+  width: 40%;
+  border-radius: 10px;
+  cursor: pointer;
+  @media (min-width: 1000px) {
+    font-size: 30px;
+  }
+`;
 export default FetchButton;

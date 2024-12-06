@@ -1,5 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 import { GlobalStyle } from "./GlobalStyle";
 import Detail from "./pages/Detail";
 import MonDex from "./pages/MonDex";
@@ -13,6 +18,7 @@ function App() {
       <GlobalStyle />
       <Router>
         <Routes>
+          <Route path="/" element={<Navigate to="/pokemon" />} />
           <Route path="/pokemon" element={<MonDex />}></Route>
           <Route path="/digimon" element={<MonDex />}></Route>
           <Route path="/pokemon/:name" element={<Detail />} />
