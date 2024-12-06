@@ -11,7 +11,7 @@ const NotFound = () => {
   const isOnline = useNetworkStatus();
   const buttonOptions = {
     position: "relative",
-    label: "Go Back",
+    label: "Go back!",
     width: "90%",
     height: "40px",
     borderRadius: "10px",
