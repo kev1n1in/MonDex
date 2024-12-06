@@ -9,16 +9,17 @@ const Species = ({ data, isPokemon }) => {
   }
   return (
     <Wrapper>
+      <Title>Description</Title>
       {description && <Describe>{description}</Describe>}
       {isPokemon && (
         <BodyStats>
           <BodyStat>
-            <Height>{data?.height} m</Height>
-            <StatTitle>Height</StatTitle>
+            <Title>Height</Title>
+            <Stat>{data?.height} m</Stat>
           </BodyStat>
           <BodyStat>
-            <Weight>{data?.weight} kg</Weight>
-            <StatTitle>Weight</StatTitle>
+            <Title>Weight</Title>
+            <Stat>{data?.weight} kg</Stat>
           </BodyStat>
         </BodyStats>
       )}
@@ -44,10 +45,13 @@ const Wrapper = styled.section`
 `;
 const Describe = styled.p`
   margin: 8px 0;
-  padding: 4px;
+  padding: 8px;
   background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
+  @media (min-width: 480px) {
+    font-size: 24px;
+  }
 `;
 const BodyStats = styled.div`
   display: flex;
@@ -57,16 +61,20 @@ const BodyStat = styled.div`
   text-align: center;
   width: 45%;
 `;
-const Height = styled.p`
+const Stat = styled.p`
+  padding: 4px 0;
   background-color: ghostwhite;
   border: 1px solid #979797;
+  border-radius: 8px;
+  @media (min-width: 480px) {
+    font-size: 24px;
+  }
+`;
 
-  border-radius: 8px;
+const Title = styled.p`
+  margin: 4px 0;
+  width: 100%;
+  text-align: center;
+  color: gray;
 `;
-const Weight = styled.p`
-  background-color: ghostwhite;
-  border: 1px solid #979797;
-  border-radius: 8px;
-`;
-const StatTitle = styled.span``;
 export default Species;

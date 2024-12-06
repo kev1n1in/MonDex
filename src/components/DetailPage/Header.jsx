@@ -151,7 +151,7 @@ const Types = styled.div`
 `;
 const Type = styled.div`
   margin-right: 4px;
-  padding: 4px;
+  padding: 4px 12px;
   background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
