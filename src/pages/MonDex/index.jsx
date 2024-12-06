@@ -76,7 +76,7 @@ const MonDex = () => {
       navigate(`/digimon/${name}`);
     }
   };
-  if (isLoadingPokemon || isLoadingDigimon) return <div>Loading...</div>;
+
   if (pokemonError)
     return <div>Error loading Pokemon: {pokemonError.message}</div>;
   if (digimonError)
