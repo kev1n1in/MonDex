@@ -15,7 +15,7 @@ const DetailHeader = ({ data, handleReturn, isDigimon }) => {
   return (
     <Header>
       <ImageContainer>
-        <Image src={image} />
+        <Image src={image} loading="lazy" />
       </ImageContainer>
       <ReturnButton onClick={handleReturn} />
       <CharacterContainer>
@@ -40,7 +40,12 @@ const DetailHeader = ({ data, handleReturn, isDigimon }) => {
         <Fields>
           {isDigimon &&
             fields.map((field, index) => (
-              <FieldImg key={index} src={field.image} alt={field.field} />
+              <FieldImg
+                key={index}
+                src={field.image}
+                alt={field.field}
+                loading="lazy"
+              />
             ))}
         </Fields>
       </CharacterContainer>
@@ -120,7 +125,7 @@ const Name = styled.h1`
   white-space: normal;
   word-wrap: break-word;
   font-size: 24px;
-  max-width: 140px;
+  max-width: 135px;
   margin: 4px 12px 4px 0;
 `;
 const Id = styled.p`

@@ -5,40 +5,27 @@ const SkillAndAbility = ({ data, isPokemon, isDigimon }) => {
   const abilities = isPokemon ? data?.abilities : [];
   const skills = isDigimon ? data?.speciesDetails?.skills : [];
 
-  const hasAbilities = abilities?.length;
-  const hasSkills = skills?.length;
-
   return (
     <>
       {isPokemon && (
         <>
           <Title>Abilities</Title>
-          {hasAbilities ? (
-            <Abilities>
-              {abilities.map((ability, index) => (
-                <Ability key={index}>{ability}</Ability>
-              ))}
-            </Abilities>
-          ) : (
-            <Ability>Not Found</Ability>
-          )}
+          <Abilities>
+            {(abilities || []).map((ability, index) => (
+              <Ability key={index}>{ability}</Ability>
+            ))}
+          </Abilities>
         </>
       )}
 
       {isDigimon && (
         <>
           <Title>Skills</Title>
-          {hasSkills ? (
-            <Abilities>
-              {skills.slice(0, 3).map((skill, index) => (
-                <Ability key={index}>{skill.skill}</Ability>
-              ))}
-            </Abilities>
-          ) : (
-            <Abilities>
-              <Ability>Not Found</Ability>
-            </Abilities>
-          )}
+          <Abilities>
+            {(skills?.slice(0, 3) || []).map((skill, index) => (
+              <Ability key={index}>{skill.skill}</Ability>
+            ))}
+          </Abilities>
         </>
       )}
     </>

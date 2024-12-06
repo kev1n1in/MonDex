@@ -5,29 +5,22 @@ const Species = ({ data }) => {
   const description = data?.describe || data?.descriptions;
   const height = data?.height;
   const weight = data?.weight;
-  const isDataMissing = !description && !height && !weight;
 
   return (
     <Wrapper>
       <Title>Description</Title>
-      {isDataMissing ? (
-        <Describe>Not Found</Describe>
-      ) : (
-        description && <Describe>{description}</Describe>
-      )}
+      <Describe>{description || "Not Found"}</Describe>
 
-      {isDataMissing && (
-        <BodyStats>
-          <BodyStat>
-            <Title>Height</Title>
-            <Stat>{height ? `${height} m` : "Not Found"}</Stat>
-          </BodyStat>
-          <BodyStat>
-            <Title>Weight</Title>
-            <Stat>{weight ? `${weight} kg` : "Not Found"}</Stat>
-          </BodyStat>
-        </BodyStats>
-      )}
+      <BodyStats>
+        <BodyStat>
+          <Title>Height</Title>
+          <Stat>{height ? `${height} m` : "Not Found"}</Stat>
+        </BodyStat>
+        <BodyStat>
+          <Title>Weight</Title>
+          <Stat>{weight ? `${weight} kg` : "Not Found"}</Stat>
+        </BodyStat>
+      </BodyStats>
     </Wrapper>
   );
 };
@@ -41,6 +34,7 @@ Species.propTypes = {
   }).isRequired,
   isPokemon: PropTypes.bool.isRequired,
 };
+
 const Wrapper = styled.section`
   margin-top: 16px;
   padding: 8px;
@@ -48,6 +42,7 @@ const Wrapper = styled.section`
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
+
 const Describe = styled.p`
   margin: 8px 0;
   padding: 8px;
@@ -58,14 +53,17 @@ const Describe = styled.p`
     font-size: 24px;
   }
 `;
+
 const BodyStats = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 const BodyStat = styled.div`
   text-align: center;
   width: 45%;
 `;
+
 const Stat = styled.p`
   padding: 4px 0;
   background-color: ghostwhite;
@@ -82,4 +80,5 @@ const Title = styled.p`
   text-align: center;
   color: gray;
 `;
+
 export default Species;

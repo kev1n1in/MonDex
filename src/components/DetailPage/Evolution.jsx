@@ -12,7 +12,11 @@ const Evolution = ({ data }) => {
           evolutionChain.map((evolution, index) => (
             <EvolutionCardContainer key={index}>
               <EvolutionCard>
-                <Image src={evolution.image} alt={evolution.name} />
+                <Image
+                  src={evolution.image}
+                  alt={evolution.name}
+                  loading="lazy"
+                />
                 <EvolutionName>{evolution.name}</EvolutionName>
               </EvolutionCard>
               {evolutionChain[index + 1] && <Arrow>{">"}</Arrow>}
