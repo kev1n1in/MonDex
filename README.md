@@ -47,9 +47,6 @@ npm run dev
 
 Use Mondex to find your Pokoemon or Digimon
 
-
-# Rodamap
-
 - [ ] Click the button at the bottom to switch between Pokemon and Digimon.
 - [ ] Click each card to see the detail page.
 - [ ] Click the button at the top right to go back to the list page.
