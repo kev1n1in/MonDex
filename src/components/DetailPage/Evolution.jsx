@@ -41,6 +41,7 @@ const EvolutionChain = styled.div`
   justify-content: space-around;
   background-color: #f2f2f2;
   border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 const Title = styled.h2`
   text-align: center;

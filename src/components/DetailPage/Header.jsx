@@ -10,6 +10,7 @@ const DetailHeader = ({ data, handleReturn, isDigimon }) => {
   const attributes = data?.speciesDetails?.attributes || [];
   const fields = data?.speciesDetails?.fields || [];
   const types = data?.types || [];
+  const formattedId = `#${id?.toString().padStart(3, "0")}`;
 
   return (
     <Header>
@@ -20,7 +21,7 @@ const DetailHeader = ({ data, handleReturn, isDigimon }) => {
       <CharacterContainer>
         <NameIdContainer>
           <Name>{name}</Name>
-          <Id>ID:{id}</Id>
+          <Id>{formattedId}</Id>
         </NameIdContainer>
         <Types>
           {levels.length > 0 && <Level>{levels[0]?.level}</Level>}
@@ -89,34 +90,37 @@ DetailHeader.propTypes = {
 
 const Header = styled.header`
   display: flex;
-  height: auto;
+  height: 120px;
   padding-left: 4px;
   margin: 12px;
   background-color: #f2f2f2;
   border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 const CharacterContainer = styled.div``;
 const ImageContainer = styled.div`
   display: flex;
   background-color: #fff;
-  width: 84px;
-  height: 84px;
+  width: 110px;
+  height: 110px;
   margin: auto 8px auto 0;
   border-radius: 8px;
 `;
 const Image = styled.img`
-  width: 84px;
-  height: 84px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 const NameIdContainer = styled.div`
   display: flex;
+  margin-top: 8px;
 `;
 
 const Name = styled.h1`
   white-space: normal;
   word-wrap: break-word;
   font-size: 24px;
-  width: 140px;
+  max-width: 140px;
   margin: 4px 12px 4px 0;
 `;
 const Id = styled.p`

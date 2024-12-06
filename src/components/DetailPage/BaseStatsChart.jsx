@@ -78,17 +78,18 @@ const BaseStatsChart = ({ baseStats }) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <ChartTitle>BaseStats</ChartTitle>
       <BarContainer>
         <Bar data={data} options={options} />
       </BarContainer>
-    </div>
+    </Wrapper>
   );
 };
 BaseStatsChart.propTypes = {
   baseStats: PropTypes.objectOf(PropTypes.number).isRequired,
 };
+const Wrapper = styled.div``;
 const ChartTitle = styled.h2`
   font-size: 24px;
   text-align: center;
@@ -97,5 +98,6 @@ const ChartTitle = styled.h2`
 const BarContainer = styled.div`
   background-color: #f2f2f2;
   border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 `;
 export default BaseStatsChart;
