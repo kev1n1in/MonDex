@@ -46,7 +46,7 @@ export const getPokemon = async (name, offset) => {
       return pokemonData;
     }
 
-    const response = await fetch(`${url}/pokemon?offset=${offset}0&limit=20`);
+    const response = await fetch(`${url}/pokemon?offset=${offset}&limit=20`);
     if (!response.ok) {
       throw new Error("Failed to fetch Pokémon list.");
     }
