@@ -1,4 +1,4 @@
-const url = "https://pokeapi.co/api/v2";
+const url = "https:pokeapi.co/api/v2";
 
 export const getPokemon = async (name, offset) => {
   try {
@@ -42,7 +42,6 @@ export const getPokemon = async (name, offset) => {
         describe: englishDescribe,
         evolutionChain: getEvolutionChain(evolutionChain.chain),
       };
-      console.log(pokemonData);
       return pokemonData;
     }
 
@@ -66,7 +65,7 @@ export const getPokemon = async (name, offset) => {
         };
       })
     );
-    console.log(data.next, data.previous);
+    data.next, data.previous;
     return { results: details, next: data.next, previous: data.previous };
   } catch (error) {
     console.error(error);
@@ -84,7 +83,7 @@ const getEvolutionChain = (chain) => {
 
       evolutionChain.push({
         name: species.name,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesId}.png`,
+        image: `https:raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesId}.png`,
       });
     }
     evolution.evolves_to?.forEach(extractEvolution);
