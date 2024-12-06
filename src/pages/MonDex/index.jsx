@@ -77,15 +77,20 @@ const MonDex = () => {
     }
   };
 
-  if (pokemonError)
-    return <div>Error loading Pokemon: {pokemonError.message}</div>;
-  if (digimonError)
-    return <div>Error loading Digimon: {digimonError.message}</div>;
-
   return (
     <Wrapper>
       <Loader isLoading={isLoadingDigimon || isLoadingPokemon} />
       {!isOnline && <AlertMessage message="You are offline!" />}
+      {pokemonError && (
+        <AlertMessage
+          message={`Error loading Pokemon: ${pokemonError.message}`}
+        />
+      )}
+      {digimonError && (
+        <AlertMessage
+          message={`Error loading Digimon: ${digimonError.message}`}
+        />
+      )}
       <Header />
       <ToggleButton />
       {noData ? (

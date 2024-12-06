@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AlertMessage from "../../components/AlertMessage";
-import ReturnButton from "../../components/Buttons/ReturnButton";
+import ReturnButton from "../../components/Buttons/Return/ReturnButton";
 import Header from "../../components/Header";
 import useNetworkStatus from "../../hooks/useNetworkStatus";
 import psyduckImg from "./psyduck.png";

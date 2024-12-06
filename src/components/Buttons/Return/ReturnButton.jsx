@@ -39,8 +39,8 @@ ReturnButton.defaultProps = {
     right: "12px",
     top: "12px",
     label: returnImg,
-    width: "24px",
-    height: "24px",
+    width: "36px",
+    height: "36px",
     fontSize: "16px",
     borderRadius: "50%",
   },
@@ -63,27 +63,19 @@ const Button = styled.button`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: ${(props) => props.borderRadius};
   cursor: pointer;
-  @media (min-width: 480px) {
-    width: ${(props) => (props.width === "24px" ? "36px" : props.width)};
-    height: ${(props) => (props.height === "24px" ? "36px" : props.height)};
-  }
+
   @media (min-width: 768px) {
-    width: ${(props) => (props.width === "24px" ? "48px" : props.width)};
-    height: ${(props) => (props.height === "24px" ? "48px" : props.height)};
+    width: ${(props) => (props.width === "36px" ? "48px" : props.width)};
+    height: ${(props) => (props.height === "36px" ? "48px" : props.height)};
   }
 `;
 const Image = styled.img`
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 16px;
-  height: 16px;
-  @media (min-width: 480px) {
-    top: 6px;
-    right: 6px;
-    width: 24px;
-    height: 24px;
-  }
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+
   @media (min-width: 768px) {
     top: 8px;
     right: 8px;

@@ -6,7 +6,7 @@ const Card = ({ name, imageUrl, types, onClick }) => {
     <Wrapper onClick={onClick}>
       <Name>{name}</Name>
       <ImageContainer>
-        <Image src={imageUrl} alt={name} />
+        <Image src={imageUrl} alt={name} loading="lazy" />
       </ImageContainer>
       <Types>
         {types && types.length > 0 ? (
