@@ -33,10 +33,26 @@ const Wrapper = styled.div`
   background-color: #cdcdcd;
   right: 24px;
   bottom: 50px;
+  @media (min-width: 768px) {
+    width: 84px;
+    height: 84px;
+  }
+  @media (min-width: 1000px) {
+    width: 120px;
+    height: 120px;
+  }
 `;
 
 const Image = styled.img`
   width: 48px;
   height: 48px;
+  @media (min-width: 768px) {
+    width: 64px;
+    height: 64px;
+  }
+  @media (min-width: 1000px) {
+    width: 96px;
+    height: 96px;
+  }
 `;
 export default ToggleButton;

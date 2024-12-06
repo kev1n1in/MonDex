@@ -114,6 +114,7 @@ const MonDex = () => {
 };
 const Wrapper = styled.div`
   height: auto;
+  margin-bottom: 48px;
 `;
 const CardsList = styled.div`
   margin: 12px;

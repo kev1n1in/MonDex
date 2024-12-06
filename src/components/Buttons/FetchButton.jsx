@@ -53,6 +53,11 @@ const Buttons = styled.div`
   justify-content: space-around;
 `;
 const Button = styled.button`
-  width: 45%;
+  font-size: 20px;
+  width: 40%;
+  border-radius: 10px;
+  @media (min-width: 1000px) {
+    font-size: 30px;
+  }
 `;
 export default FetchButton;

@@ -64,6 +64,9 @@ const Ability = styled.div`
   background-color: ghostwhite;
   border: 1px solid #979797;
   border-radius: 8px;
+  @media (min-width: 480px) {
+    font-size: 24px;
+  }
 `;
 
 export default SkillAndAbility;
