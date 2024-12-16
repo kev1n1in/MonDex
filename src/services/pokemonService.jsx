@@ -83,7 +83,7 @@ const getEvolutionChain = (chain) => {
 
       evolutionChain.push({
         name: species.name,
-        image: `https:raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesId}.png`,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesId}.png`,
       });
     }
     evolution.evolves_to?.forEach(extractEvolution);
