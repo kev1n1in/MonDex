@@ -1,4 +1,4 @@
-const url = "https:pokeapi.co/api/v2";
+const url = "https://pokeapi.co/api/v2";
 
 export const getPokemon = async (name, offset) => {
   try {
